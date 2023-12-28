@@ -45,6 +45,10 @@ GraphsTuple = jraph.GraphsTuple
 
 
 def segment_normalized(normalization):
+  """
+  闭包，假设你调用 normalized_fn = segment_normalized(10)，那么 normalized_fn 现在是一个能够对输入进行分段求和并将结果除以10的函数。
+  然后，你可以使用 normalized_fn 来对数据进行归一化的求和计算，例如 normalized_fn(data)
+  """
   def normalized_sum(*args, **kwargs):
     return ops.segment_sum(*args, **kwargs) / normalization
 
@@ -63,9 +67,12 @@ AGGREGATION = {
 
 class BetaSwish(nn.Module):
 
-  @nn.compact
+  @nn.compact # @nn.compact 是一个装饰器，用于简化Flax模块的定义。它允许你以更声明式的方式定义模块的前向传播（forward pass）
   def __call__(self, x):
-    features = x.shape[-1]
+    """
+    def __call__(self, x): 定义了类的 __call__ 方法，这使得你可以将 BetaSwish 对象像函数一样调用，并传入输入数据 x。
+    """
+    features = x.shape[-1] # 这行代码获取输入数据 x 的最后一个维度的大小，这通常代表特征的数量
     beta = self.param('Beta', nn.initializers.ones, (features,))
     return x * nn.sigmoid(beta * x)
 
