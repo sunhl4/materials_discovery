@@ -31,9 +31,15 @@ from . import gnn
 
 Array = jnp.ndarray
 PRNGKey = Array
-Shape = Iterable[int]
+Shape = Iterable[int] #数组形状，元组。例（2，3）
 Dtype = Any
+"""
+InitializerFn 是一个函数类型，用于初始化权重或其他数组。
+这类函数接受一个随机数生成键 (PRNGKey)、一个形状 (Shape) 和一个数据类型 (Dtype),
+并返回一个相应的 Array
+"""
 InitializerFn = Callable[[PRNGKey, Shape, Dtype], Array]
+
 UnaryFn = Callable[[Array], Array]
 GraphsTuple = jraph.GraphsTuple
 
