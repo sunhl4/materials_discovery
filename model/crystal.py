@@ -39,7 +39,10 @@ InitializerFn 是一个函数类型，用于初始化权重或其他数组。
 并返回一个相应的 Array
 """
 InitializerFn = Callable[[PRNGKey, Shape, Dtype], Array]
-
+"""
+UnaryFn 表示一个接受单个 Array 作为输入并返回一个 Array 的函数。
+这种类型的函数通常用于实现各种数组操作，例如激活函数或数学运算。
+"""
 UnaryFn = Callable[[Array], Array]
 GraphsTuple = jraph.GraphsTuple
 
